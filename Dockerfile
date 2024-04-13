@@ -1,5 +1,5 @@
 # Use official base image of Java Runtim
-FROM openjdk:20-jdk
+FROM openjdk:22-jdk-oracle
 
 # Set volume point to /tmp
 VOLUME /tmp
