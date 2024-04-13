@@ -8,23 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    def jdkVersion = '17'
-                    echo "Using JDK ${jdkVersion}"
-                    buildPlugin(
-                        useContainerAgent: true,
-                        useArtifactCachingProxy: false,
-                        configurations: [
-                            [platform: 'linux', jdk: jdkVersion],
-                            [platform: 'windows', jdk: jdkVersion]
-                        ]
-                    )
-
-                    // Build the Maven project
-                    sh "mvn -B -DskipTests clean package"
-                    
-                    // Use the buildPlugin step with the specified configurations
-                }
+                sh 'mvn -U -DskipTests clean package'
             }
         }
         stage('Build image') {
