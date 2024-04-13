@@ -6,9 +6,6 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.4</version>
-		<configuration>
-			<release>17</release> <!-- Specify the Java release level -->
-		</configuration>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.luv2code</groupId>
@@ -45,6 +42,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.1.4</version>
+				<configuration>
+					<release>17</release> <!-- Specify the Java release level -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
