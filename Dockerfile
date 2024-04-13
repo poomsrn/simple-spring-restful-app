@@ -1,5 +1,5 @@
 # Use official base image of Java Runtim
-FROM openjdk:8-jdk-alpine
+FROM openjdk:18-jdk-alpine
 
 # Set volume point to /tmp
 VOLUME /tmp
