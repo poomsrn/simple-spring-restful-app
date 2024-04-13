@@ -1,19 +1,28 @@
 pipeline {
-    buildPlugin(
-        useContainerAgent: true, // Set to `false` if you need to use Docker for containerized tests
-        configurations: [
-            [platform: 'linux', jdk: 17],
-            [platform: 'windows', jdk: 11],
-    ])
+    agent any
 
     environment {
         dockerImage = ''
     }
 
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+        steps {
+            script {
+                def jdkVersion = '17'
+                echo "Using JDK ${jdkVersion}"
+
+                // Build the Maven project
+                sh "mvn -B -DskipTests clean package"
+                
+                // Use the buildPlugin step with the specified configurations
+                buildPlugin(
+                    useContainerAgent: true,
+                    useArtifactCachingProxy: false,
+                    configurations: [
+                        [platform: 'linux', jdk: jdkVersion],
+                        [platform: 'windows', jdk: jdkVersion]
+                    ]
+                )
             }
         }
         stage('Build image') {
