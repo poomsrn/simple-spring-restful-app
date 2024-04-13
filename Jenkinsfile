@@ -11,11 +11,6 @@ pipeline {
                 script {
                     def jdkVersion = '17'
                     echo "Using JDK ${jdkVersion}"
-
-                    // Build the Maven project
-                    sh "mvn -B -DskipTests clean package"
-                    
-                    // Use the buildPlugin step with the specified configurations
                     buildPlugin(
                         useContainerAgent: true,
                         useArtifactCachingProxy: false,
@@ -24,6 +19,11 @@ pipeline {
                             [platform: 'windows', jdk: jdkVersion]
                         ]
                     )
+
+                    // Build the Maven project
+                    sh "mvn -B -DskipTests clean package"
+                    
+                    // Use the buildPlugin step with the specified configurations
                 }
             }
         }
